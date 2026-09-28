@@ -13,11 +13,15 @@ website:
         text: Explore Strokes
       - href: story.qmd
         text: Power vs Endurance
+      - href: nations.qmd
+        text: National Powerhouses
+      - href: podium.qmd
+        text: The Podium Edge
       - href: about.qmd
         text: About
     right:
       - icon: github
-        href: https://github.com/okhatter28/milestone5
+        href: https://github.com/okhatter28/olympic-bodies
   page-footer:
     left: "© 2026 Omar Khater"
     right: "Built with Quarto & GitHub Pages"

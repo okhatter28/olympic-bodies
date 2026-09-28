@@ -1,0 +1,81 @@
+---
+title: "National Powerhouses"
+subtitle: "Comparing swimmer body profiles across the top ten Olympic swimming nations (1980–2016)"
+format:
+  html:
+    toc: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+library(plotly)
+
+top_teams <- c(
+  "United States",
+  "Australia",
+  "Canada",
+  "Great Britain",
+  "Japan",
+  "Germany",
+  "Netherlands",
+  "China",
+  "Hungary",
+  "France"
+)
+
+df <- read_csv("data/olympics.csv.gz", show_col_types = FALSE) |>
+  filter(
+    sport == "Swimming",
+    year >= 1980,
+    !is.na(height),
+    !is.na(weight),
+    team %in% top_teams
+  ) |>
+  mutate(
+    bmi = round(weight / (height / 100)^2, 1),
+    medal_status = if_else(is.na(medal), "Competitor", paste(medal, "Medalist"))
+  )
+```
+
+Hover over any swimmer to inspect their name, event, medal result, and physical measurements. Double-click any country in the legend to isolate it, or single-click to compare specific nations.
+
+```{r}
+#| label: nation-scatter
+#| fig-width: 9
+#| fig-height: 6
+
+p <- df |>
+  ggplot(aes(
+    x = height,
+    y = weight,
+    color = team,
+    text = paste0(
+      "<b>", name, "</b> (", team, ")<br>",
+      "Event: ", event, "<br>",
+      "Year: ", year, " (", city, ")<br>",
+      "Status: ", medal_status, "<br>",
+      "Height: ", height, " cm | Weight: ", weight, " kg<br>",
+      "BMI: ", bmi
+    )
+  )) +
+  geom_point(alpha = 0.65, size = 1.8) +
+  theme_minimal(base_size = 12) +
+  labs(
+    title = "Swimmer Height and Weight by Nation (1980–2016)",
+    x = "Height (cm)",
+    y = "Weight (kg)",
+    color = "Nation"
+  )
+
+ggplotly(p, tooltip = "text")
+```
+
+## National Comparisons
+
+Traditional powerhouses like the **United States** and **Australia** show remarkably similar distributions, spanning tall sprinters and lean distance athletes across events. Meanwhile, nations like **Japan** have consistently produced medalists with a slightly more compact median stature, highlighting how stroke technique and high cadence can excel at the Olympic level.

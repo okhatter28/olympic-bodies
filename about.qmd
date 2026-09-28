@@ -4,17 +4,12 @@ title: "About"
 
 ## About the Author
 
-This project was developed by **Omar Khater** as part of Milestone 5 for data science coursework in quantitative reasoning and data visualization.
+My name is **Omar Khatter**, a student at [New College of Florida](https://www.ncf.edu/).
 
-## Project Scope
+- **Email**: [o.khatter28@ncf.edu](mailto:o.khatter28@ncf.edu) / [oawad946@gmail.com](mailto:oawad946@gmail.com)
+- **GitHub**: [okhatter28](https://github.com/okhatter28)
+- **Project Repository**: [olympic-bodies](https://github.com/okhatter28/olympic-bodies)
 
-This project examines how physical profiles—specifically height and weight—vary among elite Olympic swimmers across different events and how these body types have evolved over time.
+## Data Source
 
-## Data Sources
-
-- **Olympic Athlete Records**: Historical dataset covering 120 years of Olympic competitions (271,116 records), sourced via [TidyTuesday](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-07-27).
-
-## Repository
-
-The source code and data pipeline for this Quarto website can be found on GitHub: [okhatter28/milestone5](https://github.com/okhatter28/milestone5).
-
+This project uses historical Olympic athlete records spanning 120 years of modern Olympic Games (1896–2016), sourced through the [TidyTuesday Olympic Games dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2021/2021-07-27) (originally compiled on [Kaggle](https://www.kaggle.com/heesoo37/120-years-of-olympic-history-athletes-and-results)). The data contains individual-level records for height, weight, age, country, event, and medal results.

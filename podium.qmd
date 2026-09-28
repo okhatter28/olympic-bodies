@@ -1,0 +1,49 @@
+---
+title: "The Podium Edge"
+subtitle: "Do taller and heavier swimmers have a competitive advantage at the Olympics?"
+format:
+  html:
+    toc: true
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: podium-comparison
+#| fig-width: 9
+#| fig-height: 5
+
+library(tidyverse)
+
+df <- read_csv("data/olympics.csv.gz", show_col_types = FALSE) |>
+  filter(sport == "Swimming", year >= 1980, !is.na(height), !is.na(weight)) |>
+  mutate(
+    status = if_else(!is.na(medal), "Medalist", "Non-Medalist"),
+    sex = if_else(sex == "M", "Men", "Women")
+  )
+
+ggplot(df, aes(x = height, fill = status)) +
+  geom_density(alpha = 0.55) +
+  facet_wrap(~sex, scales = "free_y") +
+  scale_fill_brewer(palette = "Set1") +
+  labs(
+    title = "Olympic Swimming Medalists Are Significantly Taller",
+    subtitle = "Height distributions of medalists vs. non-medalists (1980–2016)",
+    x = "Height (cm)",
+    y = "Density",
+    fill = "Status"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(legend.position = "bottom")
+```
+
+## The Height Advantage in Elite Swimming
+
+Reaching the Olympic Games requires extraordinary conditioning, but reaching the podium correlates strongly with physical size:
+
+- **Men**: The median male medalist stands at **190 cm** (6'3") and weighs **84 kg**, compared to a median of **185 cm** and **79 kg** for non-medalist competitors.
+- **Women**: The median female medalist stands at **175 cm** (5'9") and weighs **65 kg**, compared to **172 cm** and **62 kg** among non-medalists.
+
+Greater stature provides longer lever arms for propulsion and allows swimmers to reach further on turns and finishes, creating a measurable separation at the highest level of competition.
